@@ -18,15 +18,20 @@
         <section class="card">
             
             <!-- Currently Serving Section -->
-            <div class="serving-card">
+            <div class="serving-card" id="currentlyServing" style="display: none;">
                 <h2>Currently Serving</h2>
-                <div class="patient-name">Rahul Sharma <span class="token-badge">N-001</span></div>
+                <div class="patient-name"><span id="servingName">-</span> <span id="servingToken" class="token-badge">-</span></div>
+            </div>
+
+            <div id="noServing" class="serving-card" style="background-color: var(--surface); border-left: 6px solid var(--border);">
+                <h2>Currently Serving</h2>
+                <div class="patient-name">None</div>
             </div>
 
             <!-- Action Buttons -->
             <div class="action-buttons">
-                <button class="primary-btn">Call Next Patient</button>
-                <button class="primary-btn">Clear Queue</button>
+                <button id="btnCallNext" class="primary-btn">Call Next Patient</button>
+                <button id="btnClearQueue" class="primary-btn">Clear Queue</button>
             </div>
 
             <!-- Queue Table -->
@@ -41,33 +46,17 @@
                             <th>Priority</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>S-002</td>
-                            <td>Anjali Desai</td>
-                            <td>34</td>
-                            <td>Fever & Cough</td>
-                            <td><span class="badge badge-normal">Normal</span></td>
-                        </tr>
-                        <tr>
-                            <td>E-003</td>
-                            <td>Vikram Singh</td>
-                            <td>45</td>
-                            <td>Chest Pain</td>
-                            <td><span class="badge badge-emergency">Emergency</span></td>
-                        </tr>
-                        <tr>
-                            <td>N-004</td>
-                            <td>Priya Patel</td>
-                            <td>28</td>
-                            <td>Routine Checkup</td>
-                            <td><span class="badge badge-normal">Normal</span></td>
-                        </tr>
+                    <tbody id="queueTableBody">
+                        <!-- Dynamic rows will be rendered here -->
                     </tbody>
                 </table>
             </div>
             
+            <div id="emptyMessage" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                No patients in queue
+            </div>
         </section>
     </main>
+    <script src="receptionist.js"></script>
 </body>
 </html>

@@ -75,9 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 6. Token Generation
-        // Generate token like T1, T2, T3... based on total number of patients stored
-        const tokenId = patients.length + 1;
-        const token = `T${tokenId}`;
+        // Using a persistent sequential counter instead of array length so 
+        // deleted items via receptionist's shift() don't cause duplicate tokens
+        let globalTokenCounter = parseInt(localStorage.getItem('globalTokenCounter')) || 0;
+        globalTokenCounter++;
+        localStorage.setItem('globalTokenCounter', globalTokenCounter.toString());
+        
+        const token = `T${globalTokenCounter}`;
 
         // 7. Create Patient Object
         const newPatient = {
