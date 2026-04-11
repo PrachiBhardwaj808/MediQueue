@@ -1,61 +1,147 @@
-# 🏥 Mediqueue
-> **Intelligent Clinical Queue Management System**
-
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![JS](https://img.shields.io/badge/JavaScript-ES6+-yellow)
-
----
+# 🏥 MediQueue - Clinic Queue Management System
 
 ## 📌 Project Overview
-**Mediqueue** is a high-performance web interface designed to automate patient check-ins. It replaces manual numbering with an algorithmic approach that prioritizes medical urgency.
 
-> **The Problem:** Standard FIFO (First-In-First-Out) queues fail in healthcare because they don't account for emergencies.
-> **The Solution:** A non-preemptive priority system that re-orders the queue dynamically based on patient vitals.
+MediQueue is a simple and smart clinic queue management system built using HTML, CSS, and JavaScript. It helps clinics manage patient queues efficiently by assigning priority based on patient symptoms and age.
+
+Instead of following a first-come-first-serve approach, this system ensures that critical patients are treated first.
 
 ---
 
 ## 🚀 Key Features
 
-| Feature | Description |
-| :--- | :--- |
-| **Token Generation** | Unique ID assignment for every patient. |
-| **Emergency Logic** | One-click prioritization for urgent cases. |
-| **Daily Auto-Reset** | System flushes cache every 24 hours at 00:00. |
-| **Live Stamping** | ISO 8601 timestamps for accurate arrival tracking. |
+* Generate token for each patient
+* Automatic priority assignment based on symptoms
+* Age-based priority adjustment (children & elderly)
+* Receptionist dashboard to manage queue
+* Real-time queue update using localStorage
 
 ---
 
-## ⚙️ Core Functionality
+## 💡 Unique Selling Point (USP)
 
-### => Priority Sorting Engine
-The system utilizes a custom sorting algorithm. Unlike a simple list, Mediqueue evaluates the `isEmergency` flag:
-1. It scans the array for `priority: true`.
-2. It moves these objects to the top.
-3. It maintains the original arrival order within the priority group.
+The main highlight of this project is its **priority-based token system**:
 
-### => Temporal Persistence
-Using the `localStorage` API, the system maintains state even during:
-* Browser refreshes
-* Unexpected power loss
-* Accidental tab closure
+* Patients enter their symptoms (like fever, cough, chest pain)
+* Each symptom is assigned a score
+* Age is also considered (higher priority for children and elderly)
+* Final priority is calculated automatically
+
+👉 This ensures that emergency patients are always treated first.
 
 ---
 
-## 🛠️ Technical Stack
+## 🛠️ Tech Stack Used
 
-* **Frontend:** HTML5 (Semantic), CSS3 (Flexbox/Grid)
-* **Logic:** JavaScript (ES6+), Local Storage API
-* **Standards:** ISO 8601 (Time), JSON (Data)
+* HTML – Structure of the web pages
+* CSS – Styling (modern mint healthcare theme)
+* JavaScript – Logic, data handling, and integration
+* localStorage – To store and share data between pages
 
 ---
 
-## 📂 System Architecture
+## 📁 Folder Structure
 
-```text
-/Mediqueue
+```
+MediQueue/
 │
-├── /css ──────────> Medical UI Aesthetic
-├── /js ───────────> Logic & Reset Engine
-├── /assets ───────> Branding & Icons
-└── index.html ────> Patient Kiosk
+├── patient/
+│   ├── patient.html
+│   ├── patient.css
+│   ├── patient.js
+│
+├── receptionist/
+│   ├── receptionist.html
+│   ├── receptionist.css
+│   ├── receptionist.js
+│
+├── assets/
+│   └── (optional common files)
+│
+└── README.md
+```
+
+---
+
+## 🔄 Workflow
+
+### 1. Patient Side
+
+* Patient enters details (name, age, symptoms)
+* System calculates score based on symptoms + age
+* Priority is assigned automatically:
+
+  * Emergency
+  * Serious
+  * Normal
+* Token is generated and stored in localStorage
+
+### 2. Receptionist Side
+
+* Fetches patient data from localStorage
+* Sorts patients by priority
+* Displays queue in table format
+* Allows receptionist to:
+
+  * Call next patient
+  * Clear queue
+
+---
+
+## ⚙️ Priority Logic
+
+### Symptom Scoring Example:
+
+* Fever → 2
+* Cough → 2
+* Headache → 1
+* Breathing Issue → 5
+* Chest Pain → 5
+
+### Age Factor:
+
+* Age ≤ 12 → +2 points
+* Age ≥ 60 → +3 points
+
+### Final Priority:
+
+* Score ≥ 7 → Emergency
+* Score 4–6 → Serious
+* Score 0–3 → Normal
+
+---
+
+## 🔗 Integration
+
+* Both patient and receptionist pages are connected using **localStorage**
+* Data added on patient side is instantly available on receptionist side
+* Queue updates dynamically
+
+---
+
+## ⚠️ Limitations
+
+* No backend (data stored only in browser)
+* Works on single system/device
+* No authentication system
+
+---
+
+## 🎯 Future Improvements
+
+* Add backend (Firebase / Node.js)
+* User login system
+* Doctor dashboard
+* Real-time database sync
+
+---
+
+## 👩‍💻 Author
+
+Prachi Bhardwaj
+
+---
+
+## 📢 Conclusion
+
+MediQueue improves clinic efficiency by prioritizing patients based on medical urgency instead of arrival time, making the system smarter and more practical.
