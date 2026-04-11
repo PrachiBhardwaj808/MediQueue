@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediQueue</title>
+    <link rel="stylesheet" href="patient.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <section class="card">
+            <h1>Patient Registration</h1>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter patient name">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" required min="0" placeholder="Enter age">
+                </div>
+                <div class="form-group">
+                    <label for="symptoms">Symptoms</label>
+                    <textarea id="symptoms" name="symptoms" required rows="3" placeholder="Describe symptoms"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="condition">Condition</label>
+                    <select id="condition" name="condition" required>
+                        <option value="" disabled selected>Select condition</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Serious">Serious</option>
+                        <option value="Emergency">Emergency</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Generate Token</button>
+            </form>
+
+        </section>
+    </main>
+    <script src="patient.js"></script>
+</body>
+</html>

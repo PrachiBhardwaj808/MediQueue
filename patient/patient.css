@@ -1,0 +1,195 @@
+/* =======================================
+   MediQueue - Patient Registration CSS
+   Theme: Mint Green / Teal (Healthcare)
+======================================= */
+
+/* --- CSS Variables (Color Palette & Theme) --- */
+:root {
+    --primary: #3EB489;         /* Mint green */
+    --primary-hover: #2F9A72;   /* Slightly darker mint */
+    --secondary: #48a6a6;       /* Soft teal */
+    --surface: #ffffff;         /* White card background */
+    --background-start: #ffffff;
+    --background-end: #e6f5ef;  /* Light mint background */
+    --text-primary: #2d3748;    /* Dark gray for readability */
+    --text-secondary: #718096;  /* Lighter gray */
+    --border: #cbd5e0;          /* Soft border color */
+    --border-focus: #3EB489;    /* Focus border color */
+}
+
+/* --- Global Resets & Basics --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --- Background and Centering --- */
+body {
+    /* Gradient from white to soft mint */
+    background: linear-gradient(135deg, var(--background-start), var(--background-end));
+    color: var(--text-primary);
+    
+    /* Centering the card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+/* --- Responsive Container --- */
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* --- Card Styling (Animation & Shadows) --- */
+.card {
+    background-color: var(--surface);
+    border-radius: 16px; /* Rounded corners */
+    /* Soft healthcare-themed shadow */
+    box-shadow: 0 10px 30px rgba(62, 180, 137, 0.15);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    
+    /* Soft animation on load */
+    animation: fadeSlideUp 0.6s ease-out forwards;
+}
+
+/* Keyframes for the soft load animation */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Header/Title Styling --- */
+h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--secondary); /* Title uses soft teal */
+    letter-spacing: -0.5px;
+}
+
+/* --- Form Layout & Spacing --- */
+.form-group {
+    margin-bottom: 1.5rem; /* Spacing between fields */
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;         /* Slightly bold labels */
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* --- Inputs, Textarea & Select Styling --- */
+input, textarea, select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border); /* Light border */
+    border-radius: 8px;              /* Rounded edges */
+    font-size: 0.95rem;
+    outline: none;
+    color: var(--text-primary);
+    background-color: #fcfcfc;
+    
+    /* Smooth transitions for hover and focus */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #a0aec0;
+}
+
+/* Input Focus Glow Effect */
+input:focus, textarea:focus, select:focus {
+    border-color: var(--border-focus);
+    background-color: #ffffff;
+    /* Soft mint glow */
+    box-shadow: 0 0 0 3px rgba(62, 180, 137, 0.2); 
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* --- Generate Token Button --- */
+.submit-btn {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    
+    /* Smooth hover effect with scaling */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px) scale(1.01); /* Soft scale/lift effect */
+    box-shadow: 0 4px 12px rgba(62, 180, 137, 0.3);
+}
+
+.submit-btn:active {
+    transform: translateY(0) scale(0.99); /* Press down effect */
+}
+
+/* --- Result / Token Section --- */
+.hidden {
+    display: none;
+}
+
+.divider {
+    height: 1px;
+    background-color: #e2e8f0;
+    margin: 2rem 0;
+}
+
+.token-display {
+    text-align: center;
+    /* Soft animation when displaying token */
+    animation: fadeSlideUp 0.4s ease-out forwards;
+}
+
+.token-display h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.token-value {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary); /* Mint green for token */
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.token-message {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+    color: #ffffff; /* White text on soft teal background */
+    background-color: var(--secondary); /* Soft teal secondary color */
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(72, 166, 166, 0.2);
+}
