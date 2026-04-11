@@ -1,6 +1,6 @@
 # 🏥 MediQueue - Clinic Queue Management System
 
-## 📌 Project Overview
+##  Project Overview
 
 MediQueue is a simple and smart clinic queue management system built using HTML, CSS, and JavaScript. It helps clinics manage patient queues efficiently by assigning priority based on patient symptoms and age.
 
@@ -8,7 +8,7 @@ Instead of following a first-come-first-serve approach, this system ensures that
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 * Generate token for each patient
 * Automatic priority assignment based on symptoms
@@ -18,7 +18,7 @@ Instead of following a first-come-first-serve approach, this system ensures that
 
 ---
 
-## 💡 Unique Selling Point (USP)
+##  Unique Selling Point (USP)
 
 The main highlight of this project is its **priority-based token system**:
 
@@ -27,20 +27,20 @@ The main highlight of this project is its **priority-based token system**:
 * Age is also considered (higher priority for children and elderly)
 * Final priority is calculated automatically
 
-👉 This ensures that emergency patients are always treated first.
+ This ensures that emergency patients are always treated first.
 
 ---
 
-## 🛠️ Tech Stack Used
+##  Tech Stack Used
 
 * HTML – Structure of the web pages
-* CSS – Styling (modern mint healthcare theme)
+* CSS – Styling 
 * JavaScript – Logic, data handling, and integration
 * localStorage – To store and share data between pages
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 MediQueue/
@@ -63,7 +63,7 @@ MediQueue/
 
 ---
 
-## 🔄 Workflow
+##  Workflow
 
 ### 1. Patient Side
 
@@ -88,7 +88,7 @@ MediQueue/
 
 ---
 
-## ⚙️ Priority Logic
+##  Priority Logic
 
 ### Symptom Scoring Example:
 
@@ -111,37 +111,9 @@ MediQueue/
 
 ---
 
-## 🔗 Integration
+##  Integration
 
 * Both patient and receptionist pages are connected using **localStorage**
 * Data added on patient side is instantly available on receptionist side
 * Queue updates dynamically
 
----
-
-## ⚠️ Limitations
-
-* No backend (data stored only in browser)
-* Works on single system/device
-* No authentication system
-
----
-
-## 🎯 Future Improvements
-
-* Add backend (Firebase / Node.js)
-* User login system
-* Doctor dashboard
-* Real-time database sync
-
----
-
-## 👩‍💻 Author
-
-Prachi Bhardwaj
-
----
-
-## 📢 Conclusion
-
-MediQueue improves clinic efficiency by prioritizing patients based on medical urgency instead of arrival time, making the system smarter and more practical.
