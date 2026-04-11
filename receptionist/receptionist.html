@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Dashboard - MediQueue</title>
+    <link rel="stylesheet" href="receptionist.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <!-- Top Heading -->
+        <header>
+            <h1>Patient Queue Dashboard</h1>
+        </header>
+
+        <!-- Main Card Container -->
+        <section class="card">
+            
+            <!-- Currently Serving Section -->
+            <div class="serving-card">
+                <h2>Currently Serving</h2>
+                <div class="patient-name">Rahul Sharma <span class="token-badge">N-001</span></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="primary-btn">Call Next Patient</button>
+                <button class="primary-btn">Clear Queue</button>
+            </div>
+
+            <!-- Queue Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Condition</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S-002</td>
+                            <td>Anjali Desai</td>
+                            <td>34</td>
+                            <td>Fever & Cough</td>
+                            <td><span class="badge badge-normal">Normal</span></td>
+                        </tr>
+                        <tr>
+                            <td>E-003</td>
+                            <td>Vikram Singh</td>
+                            <td>45</td>
+                            <td>Chest Pain</td>
+                            <td><span class="badge badge-emergency">Emergency</span></td>
+                        </tr>
+                        <tr>
+                            <td>N-004</td>
+                            <td>Priya Patel</td>
+                            <td>28</td>
+                            <td>Routine Checkup</td>
+                            <td><span class="badge badge-normal">Normal</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </section>
+    </main>
+</body>
+</html>

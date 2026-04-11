@@ -1,0 +1,231 @@
+/* =======================================
+   MediQueue - Receptionist Dashboard CSS
+   Theme: Mint Green / Teal (Healthcare)
+======================================= */
+
+/* --- CSS Variables (Shared with Patient Page) --- */
+:root {
+    --primary: #3EB489;         /* Mint green */
+    --primary-hover: #2F9A72;   /* Slightly darker mint */
+    --primary-dark: #207252;    /* Dark font readable on mint */
+    --secondary: #48a6a6;       /* Soft teal */
+    --surface: #ffffff;         /* White card background */
+    --background-start: #ffffff;
+    --background-end: #e6f5ef;  /* Light mint background */
+    --text-primary: #2d3748;    /* Dark gray for text */
+    --text-secondary: #718096;  /* Lighter gray for secondary text */
+    --border: #cbd5e0;          /* Soft border color */
+    
+    /* Table specific colors */
+    --row-even: #f8fdfb;        /* Very light mint */
+    --row-hover: #eef9f5;       /* Slightly more mint on hover */
+}
+
+/* --- Global Resets --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--background-start), var(--background-end));
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align closer to top */
+    min-height: 100vh;
+    padding: 2.5rem 1.5rem;
+}
+
+/* --- Responsive Container --- */
+.container {
+    width: 100%;
+    max-width: 900px; /* Wider container for table dashboard */
+}
+
+/* --- Header --- */
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--secondary); /* Use teal for consistency */
+    margin-bottom: 2rem;
+    letter-spacing: -0.5px;
+}
+
+/* --- Main Card Layout --- */
+.card {
+    background-color: var(--surface);
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(62, 180, 137, 0.15); /* Soft mint shadow */
+    padding: 2.5rem;
+    width: 100%;
+    
+    /* Optional load animation */
+    animation: fadeSlideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Currently Serving Highlight Box --- */
+.serving-card {
+    background-color: #E2F5ED; /* Slightly darker mint back */
+    border-left: 6px solid var(--primary); /* Left border pop */
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.serving-card h2 {
+    font-size: 1rem;
+    color: var(--primary-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+}
+
+.patient-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.token-badge {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* --- Buttons --- */
+.action-buttons {
+    display: flex;
+    gap: 1rem; /* Spacing between buttons */
+    margin-bottom: 1.5rem;
+    justify-content: flex-end;
+}
+
+button {
+    padding: 0.85rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    /* Smooth transition */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px) scale(1.02); /* Slight scale */
+    box-shadow: 0 4px 12px rgba(62, 180, 137, 0.3);
+}
+
+.primary-btn:active {
+    transform: translateY(0) scale(0.99); /* Press down */
+}
+
+/* --- Table Styling --- */
+.table-container {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background-color: #f8fafc;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+/* Alternate row styling with light mint shade */
+tbody tr:nth-child(even) {
+    background-color: var(--row-even);
+}
+
+/* Row hover effect */
+tbody tr:hover {
+    background-color: var(--row-hover);
+    transition: background-color 0.2s ease;
+}
+
+/* Remove border from last row */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- Priority Badges --- */
+.badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.badge-normal {
+    background-color: #e2f5ed;
+    color: var(--primary-dark);
+}
+
+.badge-emergency {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .patient-name {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
