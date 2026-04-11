@@ -17,7 +17,14 @@
             <div class="token-display" style="display: block; opacity: 1;">
                 <h3>Your Token Number</h3>
                 <div id="tokenNumber" class="token-value">-</div>
-                <p class="token-message">You are added to the queue.</p>
+                
+                <!-- Display Calculated condition and Total score -->
+                <div style="margin-top: 1rem; color: var(--text-primary); font-size: 1.05rem;">
+                    <p>Status: <strong id="tokenCondition">-</strong></p>
+                    <p>Total Priority Score: <strong id="tokenScore">-</strong></p>
+                </div>
+                
+                <p class="token-message" style="margin-top: 1rem;">You are added to the queue.</p>
             </div>
             
             <div class="divider"></div>
