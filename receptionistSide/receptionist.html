@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Dashboard - MediQueue</title>
+    <link rel="stylesheet" href="receptionist.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <!-- Top Heading -->
+        <header>
+            <h1>Patient Queue Dashboard</h1>
+        </header>
+
+        <!-- Main Card Container -->
+        <section class="card">
+            
+            <!-- Currently Serving Section -->
+            <div class="serving-card" id="currentlyServing" style="display: none;">
+                <h2>Currently Serving</h2>
+                <div class="patient-name"><span id="servingName">-</span> <span id="servingToken" class="token-badge">-</span></div>
+            </div>
+
+            <div id="noServing" class="serving-card" style="background-color: var(--surface); border-left: 6px solid var(--border);">
+                <h2>Currently Serving</h2>
+                <div class="patient-name">None</div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button id="btnCallNext" class="primary-btn">Call Next Patient</button>
+                <button id="btnClearQueue" class="primary-btn">Clear Queue</button>
+            </div>
+
+            <!-- Queue Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Condition</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody id="queueTableBody">
+                        <!-- Dynamic rows will be rendered here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="emptyMessage" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                No patients in queue
+            </div>
+        </section>
+    </main>
+    <script src="receptionist.js"></script>
+</body>
+</html>

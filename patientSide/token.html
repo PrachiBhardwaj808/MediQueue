@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Token - MediQueue</title>
+    <link rel="stylesheet" href="patient.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <section class="card" style="text-align: center;">
+            <h1>Registration Successful</h1>
+            
+            <div class="divider"></div>
+            
+            <div class="token-display" style="display: block; opacity: 1;">
+                <h3>Your Token Number</h3>
+                <div id="tokenNumber" class="token-value">-</div>
+                
+                <!-- Display Calculated condition and Total score -->
+                <div style="margin-top: 1rem; color: var(--text-primary); font-size: 1.05rem;">
+                    <p>Status: <strong id="tokenCondition">-</strong></p>
+                    <p>Total Priority Score: <strong id="tokenScore">-</strong></p>
+                </div>
+                
+                <p class="token-message" style="margin-top: 1rem;">You are added to the queue.</p>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div style="margin-top: 2rem;">
+                <button onclick="window.location.href='patient.html'" class="submit-btn" style="background-color: var(--secondary);">Back to Registration</button>
+            </div>
+        </section>
+    </main>
+    <script src="token.js"></script>
+</body>
+</html>
