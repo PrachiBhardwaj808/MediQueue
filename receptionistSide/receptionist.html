@@ -9,21 +9,25 @@
 </head>
 <body>
     <main class="container">
-        <!-- Top Heading -->
+
         <header>
             <h1>Patient Queue Dashboard</h1>
         </header>
 
-        <!-- Main Card Container -->
         <section class="card">
-            
-            <!-- Currently Serving Section -->
+
+            <!-- Currently Serving (shown after calling a patient) -->
             <div class="serving-card" id="currentlyServing" style="display: none;">
                 <h2>Currently Serving</h2>
-                <div class="patient-name"><span id="servingName">-</span> <span id="servingToken" class="token-badge">-</span></div>
+                <div class="patient-name">
+                    <span id="servingName">-</span>
+                    <span id="servingToken" class="token-badge">-</span>
+                </div>
             </div>
 
-            <div id="noServing" class="serving-card" style="background-color: var(--surface); border-left: 6px solid var(--border);">
+            <!-- Default state: nobody called yet -->
+            <div id="noServing" class="serving-card"
+                style="background-color: var(--surface); border-left: 6px solid var(--border);">
                 <h2>Currently Serving</h2>
                 <div class="patient-name">None</div>
             </div>
@@ -31,7 +35,8 @@
             <!-- Action Buttons -->
             <div class="action-buttons">
                 <button id="btnCallNext" class="primary-btn">Call Next Patient</button>
-                <button id="btnClearQueue" class="primary-btn">Clear Queue</button>
+                <button id="btnClearQueue" class="primary-btn"
+                    style="background-color: #e53e3e;">Clear Queue</button>
             </div>
 
             <!-- Queue Table -->
@@ -43,18 +48,20 @@
                             <th>Name</th>
                             <th>Age</th>
                             <th>Condition</th>
-                            <th>Priority</th>
+                            <th>Priority Score</th>
                         </tr>
                     </thead>
                     <tbody id="queueTableBody">
-                        <!-- Dynamic rows will be rendered here -->
+                        <!-- Rows injected by receptionist.js -->
                     </tbody>
                 </table>
             </div>
-            
-            <div id="emptyMessage" style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+
+            <div id="emptyMessage"
+                style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
                 No patients in queue
             </div>
+
         </section>
     </main>
     <script src="receptionist.js"></script>

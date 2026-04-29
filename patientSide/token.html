@@ -11,27 +11,29 @@
     <main class="container">
         <section class="card" style="text-align: center;">
             <h1>Registration Successful</h1>
-            
+
             <div class="divider"></div>
-            
+
             <div class="token-display" style="display: block; opacity: 1;">
-                <h3>Your Token Number</h3>
+                <h3>Your Position in Queue</h3>
                 <div id="tokenNumber" class="token-value">-</div>
-                
-                <!-- Display Calculated condition and Total score -->
+
                 <div style="margin-top: 1rem; color: var(--text-primary); font-size: 1.05rem;">
                     <p>Status: <strong id="tokenCondition">-</strong></p>
-                    <p>Total Priority Score: <strong id="tokenScore">-</strong></p>
+                    <p>Priority Score: <strong id="tokenScore">-</strong></p>
                 </div>
-                
-                <p class="token-message" style="margin-top: 1rem;">You are added to the queue.</p>
+
+                <p class="token-message" style="margin-top: 1rem;">
+                    You are in the queue. Your position updates in real time.
+                </p>
             </div>
-            
+
             <div class="divider"></div>
-            
-            <div style="margin-top: 2rem;">
-                <button onclick="window.location.href='patient.html'" class="submit-btn" style="background-color: var(--secondary);">Back to Registration</button>
-            </div>
+
+            <button onclick="window.location.href='patient.html'" class="submit-btn"
+                style="background-color: var(--secondary); margin-top: 1rem;">
+                Register Another Patient
+            </button>
         </section>
     </main>
     <script src="token.js"></script>

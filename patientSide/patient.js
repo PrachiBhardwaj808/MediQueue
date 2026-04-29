@@ -1,30 +1,57 @@
-document.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value;
-    const age = parseInt(document.getElementById('age').value);
-    const symptoms = document.getElementById('symptoms').value.toLowerCase();
+// =======================================
+//   MediQueue - Patient Registration JS
+// =======================================
 
-    // Scoring
+document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const age = parseInt(document.getElementById('age').value);
+    const symptomsRaw = document.getElementById('symptoms').value.toLowerCase();
+
+    // --- Symptom Scoring ---
     let score = 0;
-    if (symptoms.includes('chest pain') || symptoms.includes('breathing')) score += 5;
-    if (symptoms.includes('fever') || symptoms.includes('cough')) score += 2;
-    
-    // Age factor
-    if (age >= 60) score += 3;
+
+    if (symptomsRaw.includes('chest pain'))     score += 5;
+    if (symptomsRaw.includes('breathing'))       score += 5;
+    if (symptomsRaw.includes('fever'))           score += 2;
+    if (symptomsRaw.includes('cough'))           score += 2;
+    if (symptomsRaw.includes('headache'))        score += 1;
+    if (symptomsRaw.includes('vomiting'))        score += 2;
+    if (symptomsRaw.includes('unconscious'))     score += 5;
+    if (symptomsRaw.includes('bleeding'))        score += 4;
+
+    // --- Age Factor ---
     if (age <= 12) score += 2;
+    if (age >= 60) score += 3;
+
+    // --- Condition Label ---
+    let condition;
+    if (score >= 7)      condition = 'Emergency';
+    else if (score >= 4) condition = 'Serious';
+    else                 condition = 'Normal';
+
+    // --- Build Patient Object ---
+    const patientId = Date.now();
 
     const newPatient = {
-        id: Date.now(),
+        id: patientId,
         name: name,
         age: age,
+        symptoms: symptomsRaw,
         totalScore: score,
-        condition: score >= 7 ? 'Emergency' : (score >= 4 ? 'Serious' : 'Normal'),
-        priority: score >= 7 ? 1 : (score >= 4 ? 2 : 3),
+        condition: condition,
         time: new Date().toISOString()
     };
 
-    let patients = JSON.parse(localStorage.getItem('patients')) || [];
+    // --- Save to localStorage ---
+    const patients = JSON.parse(localStorage.getItem('patients')) || [];
     patients.push(newPatient);
     localStorage.setItem('patients', JSON.stringify(patients));
+
+    // --- Pass ID to token page via sessionStorage ---
+    sessionStorage.setItem('currentUserId', patientId);
+
+    // --- Redirect to token page ---
     window.location.href = 'token.html';
 });
