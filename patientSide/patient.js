@@ -1,40 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('registrationForm');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name').value.trim();
-        const age = parseInt(document.getElementById('age').value);
-        const symptomsInput = document.getElementById('symptoms').value.toLowerCase();
+document.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const age = parseInt(document.getElementById('age').value);
+    const symptoms = document.getElementById('symptoms').value.toLowerCase();
 
-        let symptomScore = 0;
-        const symptomPoints = { 'fever': 2, 'headache': 1, 'cough': 2, 'cold': 1, 'breathing': 5, 'chest pain': 5, 'vomiting': 3, 'dizziness': 3 };
-        for (const [symptom, points] of Object.entries(symptomPoints)) {
-            if (symptomsInput.includes(symptom)) symptomScore += points;
-        }
+    // Scoring
+    let score = 0;
+    if (symptoms.includes('chest pain') || symptoms.includes('breathing')) score += 5;
+    if (symptoms.includes('fever') || symptoms.includes('cough')) score += 2;
+    
+    // Age factor
+    if (age >= 60) score += 3;
+    if (age <= 12) score += 2;
 
-        let ageScore = (age <= 12) ? 2 : (age >= 60 ? 3 : 0);
-        const totalScore = symptomScore + ageScore;
+    const newPatient = {
+        id: Date.now(),
+        name: name,
+        age: age,
+        totalScore: score,
+        condition: score >= 7 ? 'Emergency' : (score >= 4 ? 'Serious' : 'Normal'),
+        priority: score >= 7 ? 1 : (score >= 4 ? 2 : 3),
+        time: new Date().toISOString()
+    };
 
-        let priority = 3; // Normal
-        if (totalScore >= 7) priority = 1; // Emergency
-        else if (totalScore >= 4) priority = 2; // Serious
-
-        let patients = JSON.parse(localStorage.getItem('patients')) || [];
-        const userId = "USER-" + Date.now(); // Unique ID
-        sessionStorage.setItem('currentUserId', userId);
-
-        patients.push({
-            id: userId,
-            name: name,
-            age: age,
-            totalScore: totalScore,
-            condition: priority === 1 ? 'Emergency' : (priority === 2 ? 'Serious' : 'Normal'),
-            priority: priority,
-            ageScore: ageScore, // Saved for tie-breaking
-            time: new Date().toISOString()
-        });
-
-        localStorage.setItem('patients', JSON.stringify(patients));
-        window.location.href = 'token.html'; // Go to display page
-    });
+    let patients = JSON.parse(localStorage.getItem('patients')) || [];
+    patients.push(newPatient);
+    localStorage.setItem('patients', JSON.stringify(patients));
+    window.location.href = 'token.html';
 });

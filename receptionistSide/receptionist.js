@@ -1,27 +1,36 @@
-function loadAndRender() {
-    let patients = JSON.parse(localStorage.getItem('patients')) || [];
+document.addEventListener('DOMContentLoaded', () => {
+    const queueTableBody = document.getElementById('queueTableBody');
 
-    patients.sort((a, b) => {
-        // 1. Sort by Priority (1 is highest)
-        if (a.priority !== b.priority) return a.priority - b.priority;
-        
-        // 2. TIE-BREAKER: Sort by Age Score (Higher age score jumps ahead)
-        if (a.ageScore !== b.ageScore) return b.ageScore - a.ageScore;
+    function refreshQueue() {
+        let patients = JSON.parse(localStorage.getItem('patients')) || [];
 
-        // 3. Last Resort: First come, first served
-        return new Date(a.time) - new Date(b.time);
-    });
+        patients.sort((a, b) => {
+            if (b.totalScore !== a.totalScore) {
+                return b.totalScore - a.totalScore;
+            }
+            return new Date(a.time) - new Date(b.time);
+        });
 
-    const tbody = document.getElementById('queueTableBody');
-    tbody.innerHTML = '';
-    patients.forEach((p, index) => {
-        tbody.innerHTML += `
-            <tr>
+        queueTableBody.innerHTML = '';
+        patients.forEach((p, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
                 <td><strong>#${index + 1}</strong></td>
                 <td>${p.name}</td>
                 <td>${p.age}</td>
                 <td>${p.condition}</td>
-                <td><span class="badge ${p.priority === 1 ? 'badge-emergency' : 'badge-normal'}">High (${p.priority})</span></td>
-            </tr>`;
+                <td><span class="badge ${p.priority === 1 ? 'badge-emergency' : 'badge-normal'}">Score: ${p.totalScore}</span></td>
+            `;
+            queueTableBody.appendChild(tr);
+        });
+    }
+
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'patients') refreshQueue();
     });
-}
+
+
+    refreshQueue();
+    
+    setInterval(refreshQueue, 1000);
+});
