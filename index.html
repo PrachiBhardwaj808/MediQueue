@@ -1,2 +1,40 @@
-<a href="./patientSide/patient.html">Go to Patient Side</a>
-<a href="./receptionistSide/receptionist.html">Go to Receptionist Side</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MediQueue</title>
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="overlay"></div>
+    <main class="home-container">
+        <header class="hero-section">
+            <div class="logo-icon">🏥</div>
+            <h1>MediQueue</h1>
+            <p>Smart Priority-Based Care</p>
+        </header>
+
+        <div class="selection-cards">
+            <a href="patient/patient.html" class="home-card">
+                <div class="card-icon">🤒</div>
+                <h2>Patient Portal</h2>
+                <p>Register and check your live queue position.</p>
+                <span class="action-btn">Enter Here</span>
+            </a>
+
+            <a href="receptionist/receptionist.html" class="home-card admin-variant">
+                <div class="card-icon">📋</div>
+                <h2>Receptionist Dashboard</h2>
+                <p>Manage the queue and call the next patient.</p>
+                <span class="action-btn">Staff Login</span>
+            </a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 MediQueue Clinic Management System</p>
+        </footer>
+    </main>
+</body>
+</html>
