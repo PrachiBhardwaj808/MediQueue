@@ -1,53 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const queueTableBody = document.getElementById('queueTableBody');
-    const btnCallNext = document.getElementById('btnCallNext');
+function loadAndRender() {
+    let patients = JSON.parse(localStorage.getItem('patients')) || [];
 
-    function loadAndRender() {
-        let patients = JSON.parse(localStorage.getItem('patients')) || [];
+    patients.sort((a, b) => {
+        // 1. Sort by Priority (1 is highest)
+        if (a.priority !== b.priority) return a.priority - b.priority;
+        
+        // 2. TIE-BREAKER: Sort by Age Score (Higher age score jumps ahead)
+        if (a.ageScore !== b.ageScore) return b.ageScore - a.ageScore;
 
-        // SORTING LOGIC: High Priority (1) first, then older timestamp
-        patients.sort((a, b) => {
-            if (a.priority === b.priority) {
-                return new Date(a.time) - new Date(b.time);
-            }
-            return a.priority - b.priority;
-        });
+        // 3. Last Resort: First come, first served
+        return new Date(a.time) - new Date(b.time);
+    });
 
-        queueTableBody.innerHTML = '';
-        patients.forEach((p, index) => {
-            const tr = document.createElement('tr');
-            const badgeClass = p.priority === 1 ? 'badge-emergency' : 'badge-normal';
-            
-            tr.innerHTML = `
+    const tbody = document.getElementById('queueTableBody');
+    tbody.innerHTML = '';
+    patients.forEach((p, index) => {
+        tbody.innerHTML += `
+            <tr>
                 <td><strong>#${index + 1}</strong></td>
                 <td>${p.name}</td>
                 <td>${p.age}</td>
                 <td>${p.condition}</td>
-                <td><span class="badge ${badgeClass}">P-${p.priority}</span></td>
-            `;
-            queueTableBody.appendChild(tr);
-        });
-        
-        return patients;
-    }
-
-    btnCallNext.addEventListener('click', () => {
-        let patients = loadAndRender();
-        if (patients.length > 0) {
-            const next = patients.shift(); // Removes the top (highest priority) patient
-            localStorage.setItem('patients', JSON.stringify(patients));
-            
-            document.getElementById('servingName').textContent = next.name;
-            document.getElementById('currentlyServing').style.display = 'flex';
-            document.getElementById('noServing').style.display = 'none';
-            
-            loadAndRender();
-        } else {
-            alert("No patients in queue!");
-        }
+                <td><span class="badge ${p.priority === 1 ? 'badge-emergency' : 'badge-normal'}">High (${p.priority})</span></td>
+            </tr>`;
     });
-
-    // Initial load and sync
-    loadAndRender();
-    window.addEventListener('storage', loadAndRender);
-});
+}
