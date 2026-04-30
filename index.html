@@ -1,50 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediQueue | Clinical Management System</title>
+    <title>MediQueue | Smarter Healthcare</title>
     <link rel="stylesheet" href="home.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="main-wrapper">
-        <div class="content-box">
-            <header>
-                <h1>MEDIQUEUE</h1>
-                <p>Priority-Based Patient Management System</p>
-            </header>
-
-            <section class="identity-selection">
-                <p class="instruction">Please select your portal to continue</p>
-                
-                <div class="options-container">
-                    <a href="patientSide/patient.html" class="portal-card">
-                        <div class="icon-placeholder">
-                            <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                        </div>
-                        <h3>Patient Portal</h3>
-                        <ul>
-                            <li>Token Generation</li>
-                            <li>Live Queue Tracking</li>
-                        </ul>
-                        <span class="btn">Access Portal</span>
-                    </a>
-
-                    <a href="receptionistSide/receptionist.html" class="portal-card">
-                        <div class="icon-placeholder">
-                            <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                        </div>
-                        <h3>Staff Dashboard</h3>
-                        <ul>
-                            <li>Queue Management</li>
-                            <li>Priority Sorting</li>
-                        </ul>
-                        <span class="btn btn-alt">Staff Login</span>
-                    </a>
-                </div>
-            </header>
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <img src="logo.png" class="nav-logo" alt="Logo">
+                <span class="nav-title">MediQueue</span>
+            </div>
+            <nav class="nav-right">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
         </div>
-    </div>
+    </header>
+
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <div class="main-logo-wrapper">
+                <img src="logo.png" class="main-logo" alt="MediQueue Logo">
+            </div>
+
+            <h1 class="app-name">MediQueue</h1>
+            <p class="tagline">Smarter queues. Faster care.</p>
+            <p class="hero-subtext">Revolutionizing patient flow with priority-based intelligence.</p>
+
+            <div class="button-group">
+                <button class="btn-primary" id="patientBtn" onclick="goToPatient()">I am a Patient</button>
+                <button class="btn-secondary" id="receptionistBtn" onclick="goToReceptionist()">I am a
+                    Receptionist</button>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="section">
+        <div class="content-wrapper">
+            <span class="section-badge">About Us</span>
+            <h2>Redefining Hospital Efficiency</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Priority Logic</h3>
+                    <p>Our smart token system ensures critical cases are seen first, not just
+                        first-come-first-served.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Real-time Updates</h3>
+                    <p>Reduce patient anxiety with live queue tracking and estimated wait times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="content-wrapper">
+            <h2>Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p><strong>Email:</strong> mediqueue.support@gmail.com</p>
+                    <p><strong>Phone:</strong> +91 XXXXX XXXXX</p>
+                    <p><strong>Location:</strong> India</p>
+                </div>
+                <form class="contact-form">
+                    <div class="form-row">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <script src="landingPage.js"></script>
 </body>
+
 </html>
