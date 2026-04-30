@@ -1,119 +1,109 @@
+// =======================================
+//   MediQueue - Receptionist Dashboard JS
+// =======================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // UI Elements
-    const queueTableBody = document.getElementById('queueTableBody');
-    const emptyMessage = document.getElementById('emptyMessage');
-    const btnCallNext = document.getElementById('btnCallNext');
-    const btnClearQueue = document.getElementById('btnClearQueue');
-    const currentlyServing = document.getElementById('currentlyServing');
-    const noServing = document.getElementById('noServing');
-    const servingName = document.getElementById('servingName');
-    const servingToken = document.getElementById('servingToken');
+    const queueTableBody      = document.getElementById('queueTableBody');
+    const currentlyServingDiv = document.getElementById('currentlyServing');
+    const noServingDiv        = document.getElementById('noServing');
+    const servingName         = document.getElementById('servingName');
+    const servingToken        = document.getElementById('servingToken');
+    const emptyMessage        = document.getElementById('emptyMessage');
 
-    // Load and render patients globally
-    let patients = [];
+    const btnCallNext    = document.getElementById('btnCallNext');
+    const btnClearQueue  = document.getElementById('btnClearQueue');
 
-    // 3A. Load Patients Function
-    function loadPatients() {
-        // Fetch from shared localStorage using the same key "patients"
-        patients = JSON.parse(localStorage.getItem('patients')) || [];
-        
-        // 3B. Sort Queue by Priority and Time
-        // Priority 1 = Emergency, Priority 2 = Serious, Priority 3 = Normal
+    // --- Sort patients: highest score first, earliest arrival as tiebreaker ---
+    function getSortedPatients() {
+        const patients = JSON.parse(localStorage.getItem('patients')) || [];
         patients.sort((a, b) => {
-            if (a.priority === b.priority) {
-                // If priorities are equal, compare by timestamp
-                return new Date(a.time) - new Date(b.time);
+            if (b.totalScore !== a.totalScore) {
+                return b.totalScore - a.totalScore;
             }
-            return a.priority - b.priority;
+            return new Date(a.time) - new Date(b.time);
         });
-
-        // Re-render UI
-        renderTable();
+        return patients;
     }
 
-    // 3C. Display Patients
-    function renderTable() {
+    // --- Render the queue table ---
+    function refreshQueue() {
+        const patients = getSortedPatients();
+
         queueTableBody.innerHTML = '';
 
         if (patients.length === 0) {
             emptyMessage.style.display = 'block';
-        } else {
-            emptyMessage.style.display = 'none';
-
-            // Dynamically render patients into rows
-            patients.forEach(patient => {
-                const tr = document.createElement('tr');
-                
-                // Determine badge color
-                let badgeClass = 'badge-normal';
-                if (patient.condition === 'Emergency') {
-                    badgeClass = 'badge-emergency';
-                } else if (patient.condition === 'Serious') {
-                    // Serious is closer to emergency look, or could use default
-                    badgeClass = 'badge-emergency'; 
-                    // Let's manually style 'Serious' via inline style or rely on badge-normal
-                }
-
-                // Table row HTML injection
-                tr.innerHTML = `
-                    <td><strong>${patient.token}</strong></td>
-                    <td>${patient.name}</td>
-                    <td>${patient.age}</td>
-                    <td>${patient.condition}</td>
-                    <td><span class="badge ${badgeClass}">${patient.priority === 1 ? 'High (1)' : (patient.priority === 2 ? 'Med (2)' : 'Low (3)')}</span></td>
-                `;
-                queueTableBody.appendChild(tr);
-            });
-        }
-    }
-
-    // 3D. Call Next Patient
-    function callNextPatient() {
-        if (patients.length === 0) {
-            alert('No patients in the queue to call.');
             return;
         }
 
-        // Remove first patient from the queue array using shift()
-        const nextPatient = patients.shift();
+        emptyMessage.style.display = 'none';
 
-        // Save updated queue back to localStorage
-        localStorage.setItem('patients', JSON.stringify(patients));
+        patients.forEach((p, index) => {
+            const tr = document.createElement('tr');
 
-        // Display in "Currently Serving"
-        servingName.textContent = nextPatient.name;
-        servingToken.textContent = nextPatient.token;
-        currentlyServing.style.display = 'flex';
-        noServing.style.display = 'none';
+            let badgeClass = 'badge-normal';
+            if (p.condition === 'Emergency') badgeClass = 'badge-emergency';
+            else if (p.condition === 'Serious') badgeClass = 'badge-serious';
 
-        // Refresh UI table
-        renderTable();
+            tr.innerHTML = `
+                <td><strong>#${index + 1}</strong></td>
+                <td>${p.name}</td>
+                <td>${p.age}</td>
+                <td><span class="badge ${badgeClass}">${p.condition}</span></td>
+                <td>${p.totalScore}</td>
+            `;
+            queueTableBody.appendChild(tr);
+        });
     }
 
-    // 3E. Clear Queue
-    function clearQueue() {
-        if (confirm('Are you sure you want to completely clear the queue?')) {
-            // Remove all patients
-            patients = [];
-            localStorage.setItem('patients', JSON.stringify(patients));
+    // --- Call Next Patient ---
+    btnCallNext.addEventListener('click', () => {
+        const patients = getSortedPatients();
 
-            // Clear currently serving visual
-            currentlyServing.style.display = 'none';
-            noServing.style.display = 'flex';
-
-            // Render cleared table
-            renderTable();
+        if (patients.length === 0) {
+            // No one left
+            currentlyServingDiv.style.display = 'none';
+            noServingDiv.style.display = 'flex';
+            return;
         }
-    }
 
-    // Event Listeners
-    btnCallNext.addEventListener('click', callNextPatient);
-    btnClearQueue.addEventListener('click', clearQueue);
+        // The first patient in sorted order is next
+        const next = patients[0];
 
-    // Initial Load
-    loadPatients();
+        // Show in "Currently Serving" box
+        servingName.textContent  = next.name;
+        servingToken.textContent = `Score: ${next.totalScore} | ${next.condition}`;
+        currentlyServingDiv.style.display = 'flex';
+        noServingDiv.style.display = 'none';
 
-    // 4. Real-Time Sync Simulation via Polling Interval
-    // Refresh queue every 2 seconds to fetch newly added patients safely
-    setInterval(loadPatients, 2000);
+        // Remove this patient from the queue
+        const remaining = patients.slice(1);
+        localStorage.setItem('patients', JSON.stringify(remaining));
+
+        refreshQueue();
+    });
+
+    // --- Clear Entire Queue ---
+    btnClearQueue.addEventListener('click', () => {
+        if (!confirm('Are you sure you want to clear the entire queue?')) return;
+
+        localStorage.removeItem('patients');
+
+        // Reset serving display
+        currentlyServingDiv.style.display = 'none';
+        noServingDiv.style.display = 'flex';
+
+        refreshQueue();
+    });
+
+    // --- Live update when patient page adds someone (cross-tab) ---
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'patients') refreshQueue();
+    });
+
+    // --- Initial render ---
+    refreshQueue();
+
+    // --- Poll every second for same-tab updates ---
+    setInterval(refreshQueue, 1000);
 });
