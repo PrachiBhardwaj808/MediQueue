@@ -1,9 +1,9 @@
 function goToPatient() {
-    window.location.href = "../patientSide/patient.html";
+    window.location.href = "patientSide/patient.html";
 }
 
 function goToReceptionist() {
-    window.location.href = "../receptionistSide/receptionist.html";
+    window.location.href = "receptionistSide/receptionist.html";
 }
 
 // Optional: Smooth scroll correction for fixed header
