@@ -31,8 +31,15 @@ The main highlight of this project is its **priority-based token system**:
 
 ---
 
+
+## Live Demo 
+
 Preview Live Demo Here :
 https://prachibhardwaj808.github.io/MediQueue/landingPage/landingPage.html
+
+
+
+---
 
 ##  Tech Stack Used
 
